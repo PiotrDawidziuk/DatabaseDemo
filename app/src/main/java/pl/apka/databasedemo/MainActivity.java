@@ -15,22 +15,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            SQLiteDatabase sqLiteDatabase = this.openOrCreateDatabase("Events", MODE_PRIVATE,null);
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS events (name VARCHAR, year INT(4))");
+            SQLiteDatabase sqLiteDatabase = this.openOrCreateDatabase("Users", MODE_PRIVATE,null);
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (name VARCHAR, age INT(3))");
 
-            sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('WWII', 1939)");
-            sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('WWI', 1914)");
-            sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('Moon landing', 1969)");
+            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Jon', 39)");
+            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Joe', 45)");
+            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Ava', 23)");
 
-            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM events",null);
+            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM users",null);
             int nameIndex = c.getColumnIndex("name");
-            int yearIndex = c.getColumnIndex("year");
+            int ageIndex = c.getColumnIndex("age");
 
             c.moveToFirst();
 
             while (c != null) {
                 Log.i("Results - name ",c.getString(nameIndex));
-                Log.i("Results - year ", Integer.toString(c.getInt(yearIndex)));
+                Log.i("Results - age ", Integer.toString(c.getInt(ageIndex)));
                 c.moveToNext();
             }
 
