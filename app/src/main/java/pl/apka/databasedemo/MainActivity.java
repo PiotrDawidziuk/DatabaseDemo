@@ -1,5 +1,6 @@
 package pl.apka.databasedemo;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,16 @@ public class MainActivity extends AppCompatActivity {
             sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('WWI', 1914)");
             sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('Moon landing', 1969)");
 
-            Cursor c = sqLiteDatabase.rawQuery("SELECT ")
+            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM events",null);
+            int nameIndex = c.getColumnIndex("name");
+            int yearIndex = c.getColumnIndex("year");
+
+            c.moveToFirst();
+
+            while (c != null) {
+                Log.i("Results - name ",c.getString(nameIndex));
+                Log.i("Results - year ", Integer.toString(c.getInt(yearIndex)));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
