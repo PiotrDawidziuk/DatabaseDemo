@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             while (c != null) {
                 Log.i("Results - name ",c.getString(nameIndex));
                 Log.i("Results - year ", Integer.toString(c.getInt(yearIndex)));
+                c.moveToNext();
             }
 
         } catch (Exception e) {
